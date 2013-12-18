@@ -1,5 +1,6 @@
 require "palo/version"
 require "palo/session"
+require "palo/response"
 require "palo/server"
 
 module Palo

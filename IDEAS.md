@@ -51,3 +51,14 @@ moet worden:
 
  }
  conn.cell.values(paths)
+
+
+
+ = DSL Probeersel
+
+group "server"
+  request "databases" do
+    param :show_normal, default: 1, values: { 0 => "do not show normal databases", 1 => "show" }
+    param :show_system, default: 0, values: { 0 => "do not show normal databases", 1 => "show" }
+  end
+end

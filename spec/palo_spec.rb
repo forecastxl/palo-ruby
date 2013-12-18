@@ -1,6 +1,8 @@
 require 'spec_helper'
 
 describe 'Palo' do
+  # This depends on actual palo db settings/user management
+  # This should be mocked?
   let(:valid_session) { Palo.login("127.0.0.1", "7777", "admin", "admin") }
   let(:invalid_session) { Palo.login("127.0.0.1", "7777", "admin", "bla") }
 
@@ -12,24 +14,18 @@ describe 'Palo' do
     it "returns a session after login" do
       expect(valid_session).to be_a(Palo::Session)
     end
-
-    it "has a session id set" do
-      expect(valid_session.sid).not_to eq(nil)
-    end
-
-    it "can perform a raw query" do
-      response = valid_session.query("/server/databases")
-      expect { response }.not_to raise_error
-    end
-
-    it "can return the server methods class" do
-      expect(valid_session.server).to be_an_instance_of(Palo::Server)
-    end
   end
 
   context "with invalid user credentials" do
-    it "raises an error after login" do
+    xit "raises an error after login" do
       expect { invalid_session }.to raise_error(Palo::PaloError)
     end
+  end
+
+end
+
+describe "PaloError" do
+  it "can raise a PaloError with a message" do
+    expect { raise Palo::PaloError, 'Oopsie' }.to raise_error(Palo::PaloError, 'Oopsie')
   end
 end
