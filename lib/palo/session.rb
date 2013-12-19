@@ -37,7 +37,7 @@ module Palo
 
     # Delegate methods to enable requests like 'server.databases(params)'
     %w(server database dimension element cube cell).each do |meth|
-      define_method(meth) { Palo.const_get(meth.capitalize).new(self) }
+      define_method(meth) { Palo.const_get(meth.capitalize)::Base.new(self) }
     end
 
   end

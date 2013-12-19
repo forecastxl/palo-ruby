@@ -14,11 +14,11 @@ module Palo
     end
 
     def split_columns(str)
-      str.split(";")
+      str.split(";", -1)
     end
 
-    def split_response(str)
-      split_lines(str).map { |e| split_columns(e) }
+    def split_response(str, row_func)
+      split_lines(str).map { |e| self.send(row_func, split_columns(e)) }
     end
 
     def trim_extra_quotes(str)
@@ -30,6 +30,7 @@ module Palo
       elements.each { |e| hash[e].gsub!(TRIM_REGEX, '') }
       hash
     end
+
 
   end
 end

@@ -1,14 +1,14 @@
 module Palo
-  module Server
+  module Element
     class Base
       def initialize(session)
         @session = session
       end
 
       # Delegate methods to enable requests like 'server.databases(params)'
-      %w(databases info).each do |meth|
+      %w(append create create_bulk destroy destroy_bulk info move rename replace replace_bulk).each do |meth|
         define_method(meth) do |args = {}|
-          Palo::Server.const_get(Palo.camelize(meth)).new(@session).execute(args)
+          Palo::Element.const_get(Palo.camelize(meth)).new(@session).execute(args)
         end
       end
     end

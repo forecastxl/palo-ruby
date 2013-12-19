@@ -19,7 +19,7 @@ describe 'Session' do
     end
 
     it "returns the server methods class" do
-      expect(valid_session.server).to be_an_instance_of(Palo::Server)
+      expect(valid_session.server).to be_an_instance_of(Palo::Server::Base)
     end
   end
 

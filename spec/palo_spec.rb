@@ -22,6 +22,14 @@ describe 'Palo' do
     end
   end
 
+  it "can camelize a single word" do
+    expect(Palo.camelize("test")).to eq("Test")
+  end
+
+  it "can camelize words connected with underscore" do
+    expect(Palo.camelize("nog_een_test")).to eq("NogEenTest")
+  end
+
 end
 
 describe "PaloError" do

@@ -1,6 +1,6 @@
 require 'spec_helper'
 
-describe "Server" do
+describe "Database" do
   let(:session) { Palo.login("127.0.0.1", "7777", "admin", "admin") }
   # let(:databases_response) { [
   #   ["1", "\"BedrijfX\"", "31", "32", "1", "0", "1377002785"],
@@ -11,19 +11,17 @@ describe "Server" do
   # let(:databases_response) { session.server.databases }
 
   it "returns a server object from a session" do
-    expect(session.server).to be_an_instance_of(Palo::Server::Base)
+    expect(session.database).to be_an_instance_of(Palo::Database::Base)
   end
 
-  it "performs the databases call" do
-    expect(session.server.databases).to be_an_instance_of(Array)
-  end
-
-  it "performs the info call" do
-    expect(session.server.info).to be_an_instance_of(Hash)
+  it "performs the cubes call" do
+    databases = session.server.databases
+    db_id = databases[0]['database']
+    expect(session.database.cubes({ database: db_id })).to be_an_instance_of(Array)
   end
 
   it "does not perform the fake blaat call" do
-    expect{ session.server.blaat }.to raise_error(NoMethodError)
+    expect{ session.database.blaat }.to raise_error(NoMethodError)
   end
 
   
