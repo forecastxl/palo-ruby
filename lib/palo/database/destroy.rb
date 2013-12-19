@@ -1,31 +1,27 @@
 module Palo
   module Database
-    class Destroy
-      include Palo::Response
-
+    class Destroy < Palo::Request
       def initialize(session)
-        @session = session
+        super(session)
+        @request              = '/database/destroy'
+        @request_params       = %w(database sid)
+        @response_keys        = %w(OK)
+        @single_response      = true
       end
 
-<<-eos
-      name  type  description
-      database  identifier  Identifier of the database
-      sid string  Session identifier for a server connection. Use the /server/login request to get a valid session identifier.
-eos
-      def execute(params = {})
-        response = @session.query('/database/destroy', params)
-        split_response(response, :parse_line)[0]
-      end
-
-<<-eos
-      # name  type  description
-      0 OK  boolean "1" means OK
-eos
-      def parse_line(values)
-        keys = %w(OK)
-        result = Hash[keys.zip(values)]
-        result
-      end
     end
   end
 end
+
+<<-eos
+  request url http://[SERVER]:[PORT]/database/destroy[?PARAMETER1=value[&...]]
+  short description Deletes a database
+  long description  
+  parameters  
+  name  type  description
+  database  identifier  Identifier of the database
+  sid string  Session identifier for a server connection. Use the /server/login request to get a valid session identifier.
+  result  
+  # name  type  description
+  0 OK  boolean "1" means OK
+eos

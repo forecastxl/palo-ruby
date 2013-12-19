@@ -10,6 +10,10 @@ describe 'Palo' do
     expect(Palo.version_string).to eq("Palo version #{Palo::VERSION}")
   end
 
+  it "returns the correct api version string" do
+    expect(Palo.api_version_string).to eq("Palo DB API version #{Palo::API_VERSION}")
+  end
+
   context "with valid user credentials" do
     it "returns a session after login" do
       expect(valid_session).to be_a(Palo::Session)

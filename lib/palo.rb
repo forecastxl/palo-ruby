@@ -11,6 +11,10 @@ module Palo
     "Palo version #{Palo::VERSION}"
   end
 
+  def self.api_version_string
+    "Palo DB API version #{Palo::API_VERSION}"
+  end
+
   # iets => Iets, nog_iets => NogIets
   def self.camelize(term, uppercase_first_letter = true)
     string = term.to_s
