@@ -29,6 +29,7 @@ module Palo
     # and treated according to the settings of the request.
     def execute(params = {})
       response = @session.query(@request, params)
+      puts response
       parse_response(response)
     end
 
@@ -43,7 +44,7 @@ module Palo
     # Overwrite if needed, opening with 'values = super(values)' is a good start.
     def parse_line(values)
       result = Hash[@response_keys.zip(values)]
-      @trim_quotes.each { |e| result[e].gsub!(TRIM_REGEX, '') }
+      @trim_quotes.each { |e| result[e].gsub!(TRIM_REGEX, '') if result[e].is_a?(String) }
       result
     end
 

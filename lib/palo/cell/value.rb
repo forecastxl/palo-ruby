@@ -7,6 +7,7 @@ module Palo
         @request_params       = %w(database cube path show_rule show_lock_info properties sid)
         @response_keys        = %w(type exists value rule lock_info property_values)
         @trim_quotes          = %w(value property_values)
+        @single_response      = true
       end
     end
   end
