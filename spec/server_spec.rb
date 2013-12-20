@@ -14,6 +14,11 @@ describe "Server" do
     expect(session.server).to be_an_instance_of(Palo::Server::Base)
   end
 
+  it "return a server object with public methods" do
+    methods = %w(databases info licenses load login logout save shutdown change_password user_info activate_license)
+    expect(session.server.public_methods.map(&:to_s)).to include(*methods)
+  end
+
   it "performs the databases call" do
     expect(session.server.databases).to be_an_instance_of(Array)
   end

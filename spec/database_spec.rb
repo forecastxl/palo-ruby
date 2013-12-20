@@ -10,8 +10,13 @@ describe "Database" do
   # ] }
   # let(:databases_response) { session.server.databases }
 
-  it "returns a server object from a session" do
+  it "returns a database object from a session" do
     expect(session.database).to be_an_instance_of(Palo::Database::Base)
+  end
+
+  it "returns a database object with public methods" do
+    methods = %w(cubes create destroy dimensions info load rename save unload)
+    expect(session.database.public_methods.map(&:to_s)).to include(*methods)
   end
 
   it "performs the cubes call" do

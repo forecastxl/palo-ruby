@@ -8,7 +8,6 @@ module Palo
         @response_keys        = %w(database name_database number_dimensions number_cubes status type database_token)
         @trim_quotes          = %w(name_database)
       end
-
     end
   end
 end

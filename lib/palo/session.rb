@@ -17,11 +17,11 @@ module Palo
 
     # Login to palo server and store session id
     def login(username, password)
-      query = {
+      params = {
         user: username,
         password: Digest::MD5.hexdigest(password)
       }
-      response = connection.get(path: '/server/login', query: query)
+      response = connection.get(path: '/server/login', query: params)
       raise PaloError, response.body unless response.status == 200
       @sid = response.body.split(';')[0]
     end

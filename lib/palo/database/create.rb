@@ -9,7 +9,6 @@ module Palo
         @trim_quotes          = %w(name_database)
         @single_response      = true
       end
-
     end
   end
 end

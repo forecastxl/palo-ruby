@@ -8,7 +8,6 @@ module Palo
         @response_keys        = %w(OK)
         @single_response      = true
       end
-
     end
   end
 end

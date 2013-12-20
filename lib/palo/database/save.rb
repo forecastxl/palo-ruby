@@ -1,31 +1,26 @@
 module Palo
   module Database
-    class Save
-      include Palo::Response
-
+    class Save < Palo::Request
       def initialize(session)
-        @session = session
-      end
-
-<<-eos
-      name  type  description
-      database  identifier  Identifier of the database
-      sid string  Session identifier for a server connection. Use the /server/login request to get a valid session identifier.
-eos
-      def execute(params = {})
-        response = @session.query('/database/save', params)
-        split_response(response, :parse_line)[0]
-      end
-
-<<-eos
-      # name  type  description
-      0 OK  boolean "1" means OK
-eos
-      def parse_line(values)
-        keys = %w(OK)
-        result = Hash[keys.zip(values)]
-        result
+        super(session)
+        @request              = '/database/save'
+        @request_params       = %w(database sid)
+        @response_keys        = %w(OK)
+        @single_response      = true
       end
     end
   end
 end
+
+<<-eos
+  request url http://[SERVER]:[PORT]/database/save[?PARAMETER1=value[&...]]
+  short description Saves a database to disk.
+  long description  To save cube data use the request "/cube/save".
+  parameters  
+  name  type  description
+  database  identifier  Identifier of the database
+  sid string  Session identifier for a server connection. Use the /server/login request to get a valid session identifier.
+  result  
+  # name  type  description
+  0 OK  boolean "1" means OK
+eos
