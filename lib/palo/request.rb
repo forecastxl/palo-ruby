@@ -29,9 +29,13 @@ module Palo
     # and treated according to the settings of the request.
     def execute(params = {})
       puts "PALO request '#{@request}' with params: #{params}"
-      response = @session.query(@request, params)
+      response = @session.query(@request, sanitize_input(params))
       puts response
       parse_response(response)
+    end
+
+    def sanitize_input(params)
+      params.reject { |e| !@request_params.include?(e.to_s)  }
     end
 
     # Parse the whole response. 

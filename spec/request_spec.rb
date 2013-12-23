@@ -1,10 +1,19 @@
 require 'spec_helper'
 
 describe 'Request' do
-  # Mock Response since it is a module
-  # let(:response_class) { Class.new { include Palo::Response } }
-  # let(:response) { response_class.new }
   let(:request) { Palo::Request.new(nil) }
+
+  context "when validating input parameters" do
+    # This test needs some settings, use real request obj
+    let(:request) { Palo::Database::Info.new(nil) }
+
+    it "ignores unknown input parameters" do
+      params = { database: '1', bla: 'bla'}
+      result = request.sanitize_input params
+      expect(result).to include(:database)
+      expect(result).not_to include(:bla)
+    end
+  end
 
   context "when splitting result into lines" do
     let(:databases_results) { "1;\"BedrijfX\";31;32;1;0;1377002785;\n2;\"BedrijfY\";31;32;1;0;253233241;\n" }
