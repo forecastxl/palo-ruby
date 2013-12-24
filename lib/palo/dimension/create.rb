@@ -4,7 +4,7 @@ module Palo
       def initialize(session)
         super(session)
         @request              = '/dimension/create'
-        @request_params       = %w(database dimension type sid)
+        @request_params       = %w(database new_name type sid)
         @response_keys        = %w(dimension name_dimension number_elements maximum_level maximum_indent maximum_depth type attributes_dimension attributes_cube rights_cube dimension_token)
         @trim_quotes          = %w(name_dimension)
         @single_response      = true
