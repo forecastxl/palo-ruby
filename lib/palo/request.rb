@@ -55,7 +55,7 @@ module Palo
 
   private
 
-    TRIM_REGEX = /[\A\\\"]|[\\\"\z]/
+    TRIM_REGEX = /(^\")|(\"$)/
     
     # Keep everything private so nobody accidentaly makes a call like
     # `session.server.split("haha")`
