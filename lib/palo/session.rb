@@ -3,12 +3,17 @@ require "excon" # HTTP lib
 
 module Palo
   class Session
-    attr_reader :base_url, :sid
+    attr_reader :base_url, :sid, :debug
 
     def initialize(host, port, username, password)
       @base_url = "http://#{host}:#{port}"
       @sid = false
+      @debug = false
       login(username, password)
+    end
+
+    def debug=(val)
+      @debug = !!val
     end
 
     def connection
@@ -36,7 +41,7 @@ module Palo
     end
 
     # Delegate methods to enable requests like 'server.databases(params)'
-    %w(server database dimension element cube cell).each do |meth|
+    %w(server database dimension element cube cell rule).each do |meth|
       define_method(meth) { Palo.const_get(meth.capitalize)::Base.new(self) }
     end
 
