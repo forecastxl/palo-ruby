@@ -28,9 +28,9 @@ module Palo
     # Execute the request and return the result with each row as parameterized 
     # and treated according to the settings of the request.
     def execute(params = {})
-      puts "PALO request '#{@request}' with params: #{params}"
+      puts "PALO request '#{@request}' with params: #{params}" if @session.debug
       response = @session.query(@request, sanitize_input(params))
-      puts response
+      puts response if @session.debug
       parse_response(response)
     end
 
