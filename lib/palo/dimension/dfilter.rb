@@ -5,9 +5,17 @@ module Palo
         super(session)
         @request              = '/dimension/dfilter'
         @request_params       = %w(database dimension cube area mode condition values sid)
-        @response_keys        = %w(element name_element position level indent depth type number_parents parents number_children children weights type exists value)
+        @response_keys        = %w(element name_element position level indent depth type number_parents parents number_children children weights type2 exists value)
         @trim_quotes          = %w(name_element exists value)
       end
+
+      # Dfilter result has an invalid \n in every result row
+      def split_response(str, row_func)
+        splitted = split_lines(str)
+        splitted = splitted.each_slice(2).map { |e| e.join('') }
+        splitted.map { |e| self.send(row_func, split_columns(e)) }
+      end
+
     end
   end
 end
