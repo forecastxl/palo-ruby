@@ -4,6 +4,7 @@ require 'benchmark'
 include Benchmark
 
 session = Palo::Session.new("127.0.0.1", "7777", "admin", "admin")
+puts "Valid session: #{session.is_valid_session?}"
 
 # p session.server.databases
 # p session.sid

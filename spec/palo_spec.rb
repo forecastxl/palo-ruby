@@ -21,7 +21,7 @@ describe 'Palo' do
   end
 
   context "with invalid user credentials" do
-    xit "raises an error after login" do
+    it "raises an error after login" do
       expect { invalid_session }.to raise_error(Palo::PaloError)
     end
   end

@@ -40,6 +40,16 @@ module Palo
       response.body
     end
 
+    # When session has timed out, the sid should be invalid
+    def is_valid_session?
+      begin
+        query('server/user_info')
+        true
+      rescue PaloError
+        false
+      end
+    end
+
     # Delegate methods to enable requests like 'server.databases(params)'
     %w(server database dimension element cube cell rule).each do |meth|
       define_method(meth) { Palo.const_get(meth.capitalize)::Base.new(self) }
