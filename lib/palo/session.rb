@@ -34,6 +34,7 @@ module Palo
     # Perform a raw palo request, raise PaloError if something went wrong
     # Return the raw result from the palo db
     def query(command, params = {})
+      connection.reset
       params['sid'] = @sid
       response = connection.get(path: command, query: params)
       raise PaloError, response.body unless response.status == 200
