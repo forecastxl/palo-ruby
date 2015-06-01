@@ -4,7 +4,7 @@ module Palo
       def initialize(session)
         super(session)
         @request              = '/cell/values'
-        @request_params       = %w(database cube paths show_rule show_lock_info properties sid)
+        @request_params       = %w(database name_database cube name_cube paths name_paths show_rule show_lock_info properties sid)
         @response_keys        = %w(type exists value rule lock_info property_values)
         @trim_quotes          = %w(value property_values)
       end
@@ -15,8 +15,8 @@ end
 <<-eos
   request url http://[SERVER]:[PORT]/cell/values[?PARAMETER1=value[&...]]
   short description Shows the values of cube cells
-  long description  
-  parameters  
+  long description
+  parameters
   name  type  description
   database  identifier  Identifier of a database
   cube  identifier  Identifier of a cube
@@ -25,7 +25,7 @@ end
   show_lock_info  boolean If 1, then additional information about the cell lock is returned.
   properties  identifier  Comma separated list of cell property ids.
   sid string  Session identifier for a server connection. Use the /server/login request to get a valid session identifier.
-  result  
+  result
   # name  type  description
   0 type  integer Type of the value (1=NUMERIC, 2=STRING, 99=ERROR)
   1 exists/error  integer 1 if numeric value is non-zero or string value is non-empty. In case of an error the error code.

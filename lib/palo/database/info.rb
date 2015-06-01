@@ -4,7 +4,7 @@ module Palo
       def initialize(session)
         super(session)
         @request              = '/database/info'
-        @request_params       = %w(database sid)
+        @request_params       = %w(database name_database sid)
         @response_keys        = %w(database name_database number_dimensions number_cubes status type database_token)
         @trim_quotes          = %w(name_database)
         @single_response      = true
@@ -16,12 +16,12 @@ end
 <<-eos
   request url http://[SERVER]:[PORT]/database/info[?PARAMETER1=value[&...]]
   short description Returns database information.
-  long description  
-  parameters  
+  long description
+  parameters
   name  type  description
   database  identifier  Identifier of the database
   sid string  Session identifier for a server connection. Use the /server/login request to get a valid session identifier.
-  result  
+  result
   # name  type  description
   0 database  identifier  Identifier of the database
   1 name_database string  Name of the database

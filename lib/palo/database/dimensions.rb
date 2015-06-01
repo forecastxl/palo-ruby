@@ -4,7 +4,7 @@ module Palo
       def initialize(session)
         super(session)
         @request              = '/database/dimensions'
-        @request_params       = %w(database show_normal show_system show_attribute show_info sid)
+        @request_params       = %w(database name_database show_normal show_system show_attribute show_info sid)
         @response_keys        = %w(dimension name_dimension number_elements maximum_level maximum_indent maximum_depth type attributes_dimension attributes_cube rights_cube dimension_token)
         @trim_quotes          = %w(name_dimension)
       end
@@ -15,8 +15,8 @@ end
 <<-eos
   request url http://[SERVER]:[PORT]/database/dimensions[?PARAMETER1=value[&...]]
   short description Returns the list of dimensions.
-  long description  
-  parameters  
+  long description
+  parameters
   name  type  description
   database  identifier  Identifier of the database
   show_normal identifier  Show dimensions of type normal (0=do not show normal dimensions, 1=show (default))
@@ -24,7 +24,7 @@ end
   show_attribute  identifier  Show dimensions of type attribute (0=do not show attribute dimensions (default), 1=show)
   show_info identifier  Show dimensions of type user info (0=do not show user info dimensions (default), 1=show)
   sid string  Session identifier for a server connection. Use the /server/login request to get a valid session identifier.
-  result  
+  result
   # name  type  description
   0 dimension identifier  Identifier of the dimension
   1 name_dimension  string  Name of the dimension

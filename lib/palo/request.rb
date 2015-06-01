@@ -34,6 +34,26 @@ module Palo
       parse_response(response)
     end
 
+    def execute2(params = {})
+      puts "PALO request '#{@request}' with params: #{params}" if @session.debug
+      response = @session.query(@request, sanitize_input(params))
+      puts response if @session.debug
+      parse_response2(response)
+    end
+
+    def parse_response2(response)
+      result = split_response2(response, :parse_line)
+      @single_response ? result.shift : result
+    end
+
+    def split_response2(str, row_func)
+      split_lines2(str).map { |e| self.send(row_func, split_columns(e)) }
+    end
+
+    def split_lines2(str)
+      str.gsub(";;;\n",";;;").split("\n")
+    end
+
     def sanitize_input(params)
       params.reject { |e| !@request_params.include?(e.to_s)  }
     end

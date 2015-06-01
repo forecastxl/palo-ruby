@@ -4,7 +4,7 @@ module Palo
       def initialize(session)
         super(session)
         @request              = '/element/replace'
-        @request_params       = %w(database dimension element name_element type children weights sid)
+        @request_params       = %w(database name_database dimension name_dimension element name_element type children name_children weights sid)
         @response_keys        = %w(element name_element position level indent depth type number_parents parents number_children children weights)
         @trim_quotes          = %w(name_element)
         @single_response      = true
@@ -17,7 +17,7 @@ end
   request url http://[SERVER]:[PORT]/element/replace[?PARAMETER1=value[&...]]
   short description Creates or updates an element
   long description  This request creates or changes an element. For consolidated elements this request replaces the existing elements with the given children elements.
-  parameters  
+  parameters
   name  type  description
   database  identifier  Identifier of a database
   dimension identifier  Identifier of a dimension
@@ -27,7 +27,7 @@ end
   children  identifier  Comma separated list of children identifiers. (Only for type=4)
   weights double  Optional comma separate list of children weight. (defaults to weight=1 for each child) (Only for type=4)
   sid string  Session identifier for a server connection. Use the /server/login request to get a valid session identifier.
-  result  
+  result
   # name  type  description
   0 element identifier  Identifier of the element
   1 name_element  string  Name of the element

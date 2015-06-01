@@ -4,7 +4,7 @@ module Palo
       def initialize(session)
         super(session)
         @request              = '/element/create_bulk'
-        @request_params       = %w(database dimension name_elements type types children name_children weights sid)
+        @request_params       = %w(database name_database dimension name_dimension name_elements type types children name_children weights sid)
         #TODO: Reponse keys staan niet in de docs, controleer dit
         @response_keys        = %w(element name_element position level indent depth type number_parents parents number_children children weights)
         @trim_quotes          = %w(name_element)
@@ -16,8 +16,8 @@ end
 <<-eos
   request url http://[SERVER]:[PORT]/element/create_bulk[?PARAMETER1=value[&...]]
   short description Creates multiple elements
-  long description  
-  parameters  
+  long description
+  parameters
   name  type  description
   database  identifier  Identifier of a database
   dimension identifier  Identifier of a dimension
@@ -28,6 +28,6 @@ end
   name_children identifier  Comma and colon separated list of children names. Used only if children parameter is omitted. (Only for type=4)
   weights double  Optional comma and colon separated list of children weight. (defaults to weight=1 for each child) (Only for type=4)
   sid string  Session identifier for a server connection. Use the /server/login request to get a valid session identifier.
-  result  
+  result
   # name  type  description
 eos

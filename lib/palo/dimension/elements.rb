@@ -4,7 +4,7 @@ module Palo
       def initialize(session)
         super(session)
         @request              = '/dimension/elements'
-        @request_params       = %w(database dimension parent limit sid)
+        @request_params       = %w(database name_database dimension name_dimension parent limit sid)
         @response_keys        = %w(element name_element position level indent depth type number_parents parents number_children children weights)
         @trim_quotes          = %w(name_element)
       end
@@ -15,15 +15,15 @@ end
 <<-eos
   request url http://[SERVER]:[PORT]/dimension/elements[?PARAMETER1=value[&...]]
   short description Shows all elements of a dimension
-  long description  
-  parameters  
+  long description
+  parameters
   name  type  description
   database  identifier  Identifier of a database
   dimension identifier  Identifier of a dimension
   parent  identifier  Identifier of parent for element filtering or empty parameter for root elements. Root elements includes children of hidden elements. (no filter by default)
   limit identifier  Comma delimited offset of first element returned (0-default) and maximal count of returned element (all elements by default)
   sid string  Session identifier for a server connection. Use the /server/login request to get a valid session identifier.
-  result  
+  result
   # name  type  description
   0 element identifier  Identifier of the element
   1 name_element  string  Name of the element

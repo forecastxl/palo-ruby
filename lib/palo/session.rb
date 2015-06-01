@@ -4,12 +4,16 @@ require "excon" # HTTP lib
 module Palo
   class Session
     attr_reader :base_url, :sid, :debug
+    @@sid = ''
+    @@ttl = Time.new
 
     def initialize(host, port, username, password)
       @base_url = "http://#{host}:#{port}"
-      @sid = false
       @debug = false
-      login(username, password)
+      if @@ttl <= Time.now
+        @@sid = ''
+        login(username, password)
+      end
     end
 
     def debug=(val)
@@ -28,15 +32,21 @@ module Palo
       }
       response = connection.get(path: '/server/login', query: params)
       raise PaloError, response.body unless response.status == 200
-      @sid = response.body.split(';')[0]
+      @@sid = response.body.split(';')[0]
+      @@ttl = Time.now + response.body.split(';')[1].to_i.seconds - 1
     end
 
     # Perform a raw palo request, raise PaloError if something went wrong
     # Return the raw result from the palo db
     def query(command, params = {})
-      params['sid'] = @sid
+      params['sid'] = @@sid
       response = connection.get(path: command, query: params)
-      raise PaloError, response.body unless response.status == 200
+      unless response.status == 200
+        Rails.logger.info "sid: #{@@sid}"
+        Rails.logger.info "ttl: #{@@ttl}"
+        Rails.logger.info "now: #{Time.now}"
+        raise PaloError, response.body
+      end
       response.body
     end
 
@@ -44,6 +54,5 @@ module Palo
     %w(server database dimension element cube cell rule).each do |meth|
       define_method(meth) { Palo.const_get(meth.capitalize)::Base.new(self) }
     end
-
   end
 end

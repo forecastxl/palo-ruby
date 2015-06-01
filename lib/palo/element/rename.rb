@@ -4,7 +4,7 @@ module Palo
       def initialize(session)
         super(session)
         @request              = '/element/rename'
-        @request_params       = %w(database dimension element new_name sid)
+        @request_params       = %w(database name_database dimension name_dimension element name_element new_name sid)
         @response_keys        = %w(element name_element position level indent depth type number_parents parents number_children children weights)
         @trim_quotes          = %w(name_element)
         @single_response      = true
@@ -16,15 +16,15 @@ end
 <<-eos
   request url http://[SERVER]:[PORT]/element/rename[?PARAMETER1=value[&...]]
   short description Changes the name of an element.
-  long description  
-  parameters  
+  long description
+  parameters
   name  type  description
   database  identifier  Identifier of a database
   dimension identifier  Identifier of a dimension
   element identifier  Identifier of an element
   new_name  string  New name of the element
   sid string  Session identifier for a server connection. Use the /server/login request to get a valid session identifier.
-  result  
+  result
   # name  type  description
   0 element identifier  Identifier of the element
   1 name_element  string  Name of the element

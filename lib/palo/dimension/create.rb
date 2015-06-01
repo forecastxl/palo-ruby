@@ -4,7 +4,7 @@ module Palo
       def initialize(session)
         super(session)
         @request              = '/dimension/create'
-        @request_params       = %w(database new_name type sid)
+        @request_params       = %w(database name_database new_name type sid)
         @response_keys        = %w(dimension name_dimension number_elements maximum_level maximum_indent maximum_depth type attributes_dimension attributes_cube rights_cube dimension_token)
         @trim_quotes          = %w(name_dimension)
         @single_response      = true
@@ -16,14 +16,14 @@ end
 <<-eos
  request url  http://[SERVER]:[PORT]/dimension/create[?PARAMETER1=value[&...]]
  short description  Creates a dimension
- long description 
- parameters 
+ long description
+ parameters
  name type  description
  database identifier  Identifier of a database
  new_name string  Name of the new dimension
  type identifier  Type of the dimension (0=normal (default), 3=user info)
  sid  string  Session identifier for a server connection. Use the /server/login request to get a valid session identifier.
- result 
+ result
  #  name  type  description
  0  dimension identifier  Identifier of the dimension
  1  name_dimension  string  Name of the dimension
