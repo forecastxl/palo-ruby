@@ -13,6 +13,10 @@ describe 'Session' do
       expect(valid_session.sid).not_to eq(nil)
     end
 
+    it "is a valid session" do
+      expect(valid_session.is_valid_session?).to eq(true)
+    end
+
     it "performs a raw query" do
       response = valid_session.query("/server/databases")
       expect { response }.not_to raise_error
@@ -21,10 +25,18 @@ describe 'Session' do
     it "returns the server methods class" do
       expect(valid_session.server).to be_an_instance_of(Palo::Server::Base)
     end
+
+    context "after x minutes" do
+      before { valid_session.instance_variable_set(:@sid, nil) }
+      
+      it "is not a valid session due too session timeout" do
+        expect(valid_session.is_valid_session?).to eq(false)
+      end
+    end
   end
 
   context "with invalid user credentials" do
-    xit "raises an error after login" do
+    it "raises an error after login" do
       expect { invalid_session }.to raise_error(Palo::PaloError)
     end
   end
