@@ -4,7 +4,7 @@ module Palo
       def initialize(session)
         super(session)
         @request              = '/database/cubes'
-        @request_params       = %w(database show_normal show_system show_attribute show_info show_gputype sid)
+        @request_params       = %w(database name_database show_normal show_system show_attribute show_info show_gputype sid)
         @response_keys        = %w(cube name_cube number_dimensions dimensions number_cells number_filled_cells status type cube_token)
         @trim_quotes          = %w(name_cube)
       end
@@ -15,8 +15,8 @@ end
 <<-eos
   request url http://[SERVER]:[PORT]/database/cubes[?PARAMETER1=value[&...]]
   short description Returns the list of cubes.
-  long description  
-  parameters  
+  long description
+  parameters
   name  type  description
   database  identifier  Identifier of the database
   show_normal identifier  Show cubes of type normal (0=do not show normal cubes, 1=show (default))
@@ -25,7 +25,7 @@ end
   show_info identifier  Show cubes of type user info (0=do not show user info cubes (default), 1=show)
   show_gputype  identifier  Show cubes of type gpu type (0=do not show gpu type cubes, 1=show (default))
   sid string  Session identifier for a server connection. Use the /server/login request to get a valid session identifier.
-  result  
+  result
   # name  type  description
   0 cube  identifier  Identifier of the cube
   1 name_cube string  Name of the cube
