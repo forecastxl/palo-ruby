@@ -4,7 +4,7 @@ module Palo
       def initialize(session)
         super(session)
         @request              = '/dimension/elements'
-        @request_params       = %w(database name_database dimension name_dimension parent limit sid)
+        @request_params       = %w(database name_database dimension name_dimension parent limit element show_permission sid)
         @response_keys        = %w(element name_element position level indent depth type number_parents parents number_children children weights)
         @trim_quotes          = %w(name_element)
       end

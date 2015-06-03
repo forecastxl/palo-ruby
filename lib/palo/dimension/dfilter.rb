@@ -4,7 +4,7 @@ module Palo
       def initialize(session)
         super(session)
         @request              = '/dimension/dfilter'
-        @request_params       = %w(database dimension cube area mode condition values sid)
+        @request_params       = %w(database name_database dimension name_dimension cube name_cube area mode condition values sid)
         @response_keys        = %w(element name_element position level indent depth type number_parents parents number_children children weights type2 exists value)
         @trim_quotes          = %w(name_element exists value)
       end
@@ -24,7 +24,7 @@ end
   request url http://[SERVER]:[PORT]/dimension/dfilter[?PARAMETER1=value[&...]]
   short description Filters dimension elements.
   long description  Filters elements according to specified conditions
-  parameters  
+  parameters
   name  type  description
   database  identifier  Identifier of a database
   dimension identifier  Identifier of a dimension
@@ -34,7 +34,7 @@ end
   condition string  Condition on the value of numeric or string cells (default is no condition). A condition starts with >, >=, <, <=, ==, or != and is followed by a double or a string. Two condition can be combined by and, or, xor. If you specifiy a string value, the value has to be csv encoded. Do not forget to URL encode the complete condition string.
   values  double  Values for Top, Upper % and Lower % in this order.
   sid string  Session identifier for a server connection. Use the /server/login request to get a valid session identifier.
-  result  
+  result
   # name  type  description
   0 element identifier  Identifier of the element
   1 name_element  string  Name of the element

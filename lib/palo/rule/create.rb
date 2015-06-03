@@ -4,7 +4,8 @@ module Palo
       def initialize(session)
         super(session)
         @request              = '/rule/create'
-        @request_params       = %w(database name_database cube name_cube definition activate external_identifier comment use_identifier sid)
+        @request_params       = %w(database name_database cube name_cube definition activate
+                                   external_identifier comment use_identifier sid)
         @response_keys        = %w(rule rule_string external_identifier comment timestamp active)
         @trim_quotes          = %w(rule_string comment)
       end

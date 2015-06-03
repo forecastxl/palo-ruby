@@ -4,7 +4,7 @@ module Palo
       def initialize(session)
         super(session)
         @request              = '/cube/clear'
-        @request_params       = %w(database cube area complete sid)
+        @request_params       = %w(database name_database cube name_cube area complete sid)
         @response_keys        = %w(cube name_cube number_dimensions dimensions number_cells number_filled_cells status type cube_token)
         @trim_quotes          = %w(name_cube)
         @single_response      = true
@@ -17,14 +17,14 @@ end
   request url http://[SERVER]:[PORT]/cube/clear[?PARAMETER1=value[&...]]
   short description Clears a cube
   long description  Clears a region of a cube. An area of the cube has to specified. All elements within this area are cleared.
-  parameters  
+  parameters
   name  type  description
   database  identifier  Identifier of a database
   cube  identifier  Identifier of a cube
   area  area  Comma separated list of element identifier lists. An identifier list is separated by colons. The area is the cartesian product.
   complete  boolean (Optional) If complete is "1" then the whole cube - regardless of the specified area - will be cleared. It is not necessary to even specify the parameter "area" in this case. Default is to use "area".
   sid string  Session identifier for a server connection. Use the /server/login request to get a valid session identifier.
-  result  
+  result
   # name  type  description
   0 cube  identifier  Identifier of the cube
   1 name_cube string  Name of the cube

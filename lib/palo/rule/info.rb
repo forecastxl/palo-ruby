@@ -4,7 +4,7 @@ module Palo
       def initialize(session)
         super(session)
         @request              = '/rule/info'
-        @request_params       = %w(database cube rule use_identifier sid)
+        @request_params       = %w(database name_database cube name_cube rule use_identifier sid)
         @response_keys        = %w(rule rule_string external_identifier comment timestamp active)
         @trim_quotes          = %w(rule_string comment)
       end
@@ -15,15 +15,15 @@ end
 <<-eos
   request url http://[SERVER]:[PORT]/rule/info[?PARAMETER1=value[&...]]
   short description Returns information about a defined rule.
-  long description  
-  parameters  
+  long description
+  parameters
   name  type  description
   database  identifier  Identifier of a database
   cube  identifier  Identifier of a cube
   rule  string  Comma separated list of rule identifiers to be shown
   use_identifier  boolean Use identifier in textual representation of the rule in the result. The definition can use name or identifier independent of the parameter.
   sid string  Session identifier for a server connection. Use the /server/login request to get a valid session identifier.
-  result  
+  result
   # name  type  description
   0 rule  identifier  Identifier of the rule
   1 rule_string string  Textual representation for the rule

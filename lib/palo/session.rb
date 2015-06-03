@@ -20,18 +20,21 @@ module Palo
       response = connection.get(path: command, query: params, persistent: true)
 
       # get new sid and retry query
-      unless response.status == 200
-        # TODO: only trigger if the response indicates that the sid is expired
-        puts "Palo query failed -> status: #{response.status}, body: #{response.body}"
-        params['sid'] = login
-        response = connection.get(path: command, query: params, persistent: true)
+      if response.status == 400
+        if response.body.starts_with?('1015')
+          p "Olap - info: session is expired, getting new session"
+          params['sid'] = login
+          response = connection.get(path: command, query: params, persistent: true)
+        end
+
+        # TODO: if the response indicates that the database is not loaded
+        if response.body.starts_with?('2002')
+          p "Olap - info: database is not loaded, loading database"
+          p "Olap - error: loading needs implementing"
+          # query('database/load')
+          # response = connection.get(path: command, query: params, persistent: true)
+        end
       end
-      # TODO: if the response indicates that the database is not loaded
-      # unless response.status == 200
-      #   puts "Palo query failed -> status: #{response.status}, body: #{response.body}"
-      #   params['sid'] = login
-      #   response = connection.get(path: command, query: params, persistent: true)
-      # end
 
       raise PaloError, response.body unless response.status == 200
       response.body

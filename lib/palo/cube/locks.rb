@@ -4,7 +4,7 @@ module Palo
       def initialize(session)
         super(session)
         @request              = '/cube/locks'
-        @request_params       = %w(database cube sid)
+        @request_params       = %w(database name_database cube name_cube sid)
         @response_keys        = %w(lock area user steps)
         @trim_quotes          = %w(user)
       end
@@ -15,13 +15,13 @@ end
 <<-eos
   request url http://[SERVER]:[PORT]/cube/locks[?PARAMETER1=value[&...]]
   short description Lists the locked cube areas
-  long description  
-  parameters  
+  long description
+  parameters
   name  type  description
   database  identifier  Identifier of a database
   cube  identifier  Identifier of a cube
   sid string  Session identifier for a server connection. Use the /server/login request to get a valid session identifier.
-  result  
+  result
   # name  type  description
   0 lock  integer Indentifier of the locked area
   1 area  area  Comma separated list of element identifiers list. Each element identifiers list is colon separated. The area is the cartesian product.

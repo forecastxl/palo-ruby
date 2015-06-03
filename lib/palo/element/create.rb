@@ -4,8 +4,10 @@ module Palo
       def initialize(session)
         super(session)
         @request              = '/element/create'
-        @request_params       = %w(database name_database dimension name_dimension new_name type children weights sid)
-        @response_keys        = %w(element name_element position level indent depth type number_parents parents number_children children weights)
+        @request_params       = %w(database name_database dimension name_dimension new_name type
+                                  children name_children weights sid)
+        @response_keys        = %w(element name_element position level indent depth type
+                                   number_parents parents number_children children weights)
         @trim_quotes          = %w(name_element)
         @single_response      = true
       end

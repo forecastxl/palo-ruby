@@ -4,7 +4,8 @@ module Palo
       def initialize(session)
         super(session)
         @request              = '/server/info'
-        @response_keys        = %w(major_version minor_version type_version build_number encryption https_port data_token)
+        @response_keys        = %w(major_version minor_version type_version build_number encryption
+                                   https_port data_token)
         @single_response      = true
       end
     end
@@ -15,10 +16,10 @@ end
   request url http://[SERVER]:[PORT]/server/info[?PARAMETER1=value[&...]]
   short description Information about the server
   long description  Returns information about the server, i. e. its version number.
-  parameters  
+  parameters
   name  type  description
   - - Needs no parameter
-  result  
+  result
   # name  type  description
   0 major_version integer major version of the server
   1 minor_version integer minor version of the server

@@ -4,7 +4,7 @@ module Palo
       def initialize(session)
         super(session)
         @request              = '/dimension/element'
-        @request_params       = %w(database dimension position sid)
+        @request_params       = %w(database name_database dimension name_dimension position sid)
         @response_keys        = %w(element name_element position level indent depth type number_parents parents number_children children weights)
         @trim_quotes          = %w(name_element)
         @single_result        = true
@@ -16,14 +16,14 @@ end
 <<-eos
   request url http://[SERVER]:[PORT]/dimension/element[?PARAMETER1=value[&...]]
   short description Shows element at position "n"
-  long description  
-  parameters  
+  long description
+  parameters
   name  type  description
   database  identifier  Identifier of a database
   dimension identifier  Identifier of a dimension
   position  integer Position of element
   sid string  Session identifier for a server connection. Use the /server/login request to get a valid session identifier.
-  result  
+  result
   # name  type  description
   0 element identifier  Identifier of the element
   1 name_element  string  Name of the element

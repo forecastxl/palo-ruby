@@ -4,7 +4,8 @@ module Palo
       def initialize(session)
         super(session)
         @request              = '/server/licenses'
-        @response_keys        = %w(licensekey customer version numconcurrent numnamed activationdate expirationdate sharinglimit numgpu features)
+        @response_keys        = %w(licensekey customer version numconcurrent numnamed activationdate
+                                   expirationdate sharinglimit numgpu features)
         @trim_quotes          = %w(licensekey customer features)
       end
     end
@@ -15,10 +16,10 @@ end
   request url http://[SERVER]:[PORT]/server/licenses[?PARAMETER1=value[&...]]
   short description Information about the server license
   long description  First line represents server's hardware key. Other lines represent available licenses as described below.
-  parameters  
+  parameters
   name  type  description
   - - Needs no parameter
-  result  
+  result
   # name  type  description
   0 licensekey  string  License key
   1 customer  string  Customer name

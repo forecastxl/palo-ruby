@@ -16,6 +16,5 @@ module Palo
         end
       end
     end
-
   end
 end

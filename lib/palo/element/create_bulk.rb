@@ -4,9 +4,11 @@ module Palo
       def initialize(session)
         super(session)
         @request              = '/element/create_bulk'
-        @request_params       = %w(database name_database dimension name_dimension name_elements type types children name_children weights sid)
-        #TODO: Reponse keys staan niet in de docs, controleer dit
-        @response_keys        = %w(element name_element position level indent depth type number_parents parents number_children children weights)
+        @request_params       = %w(database name_database dimension name_dimension name_elements
+                                   type types children name_children weights sid)
+        # Reponse keys will remain largly empty or contain useless information, don't use this
+        @response_keys        = %w(element name_element position level indent depth type
+                                   number_parents parents number_children children weights)
         @trim_quotes          = %w(name_element)
       end
     end

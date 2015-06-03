@@ -4,7 +4,8 @@ module Palo
       def initialize(session)
         super(session)
         @request              = '/element/replace_bulk'
-        @request_params       = %w(database name_database dimension name_dimension elements name_elements type children weights sid)
+        @request_params       = %w(database name_database dimension name_dimension elements
+                                   name_elements type children weights sid)
         @response_keys        = %w(OK)
         @single_response      = true
       end

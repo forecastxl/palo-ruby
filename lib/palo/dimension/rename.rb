@@ -4,8 +4,10 @@ module Palo
       def initialize(session)
         super(session)
         @request              = '/dimension/rename'
-        @request_params       = %w(database dimension new_name sid)
-        @response_keys        = %w(dimension name_dimension number_elements maximum_level maximum_indent maximum_depth type attributes_dimension attributes_cube rights_cube dimension_token)
+        @request_params       = %w(database name_database dimension name_dimension new_name sid)
+        @response_keys        = %w(dimension name_dimension number_elements maximum_level
+                                   maximum_indent maximum_depth type attributes_dimension
+                                   attributes_cube rights_cube dimension_token)
         @trim_quotes          = %w(name_dimension)
         @single_response      = true
       end
@@ -16,14 +18,14 @@ end
 <<-eos
   request url http://[SERVER]:[PORT]/dimension/rename[?PARAMETER1=value[&...]]
   short description Returns dimension information.
-  long description  
-  parameters  
+  long description
+  parameters
   name  type  description
   database  identifier  Identifier of a database
   dimension identifier  Identifier of a dimension
   new_name  string  New name of the dimension
   sid string  Session identifier for a server connection. Use the /server/login request to get a valid session identifier.
-  result  
+  result
   # name  type  description
   0 dimension identifier  Identifier of the dimension
   1 name_dimension  string  Name of the dimension

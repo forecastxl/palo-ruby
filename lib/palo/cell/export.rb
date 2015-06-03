@@ -4,7 +4,7 @@ module Palo
       def initialize(session)
         super(session)
         @request              = '/cell/export'
-        @request_params       = %w(database cube blocksize path area condition use_rules base_only skip_empty type properties sid)
+        @request_params       = %w(database name_database cube name_cube blocksize path area condition use_rules base_only skip_empty type properties sid)
         @response_keys        = %w(type exists value path property_values)
         @trim_quotes          = %w(value property_values)
       end
@@ -16,7 +16,7 @@ end
   request url http://[SERVER]:[PORT]/cell/export[?PARAMETER1=value[&...]]
   short description Exports values of cube cells
   long description  Note that the last line of the result differs from the description below. The line contains two doubles. The first describes progress of the export, the second the maximal number of exported cells not including the condition. In order to provide a progress bar, take the quotient of the first and second integer as float. This will yield a number between 0.0 and 1.0 describing the progress.
-  parameters  
+  parameters
   name  type  description
   database  identifier  Identifier of a database
   cube  identifier  Identifier of a cube
@@ -30,7 +30,7 @@ end
   type  integer Type of exported cells. 0=numeric and string, 1=only numeric, 2=only string (default is 0)
   properties  identifier  Comma separated list of cell property ids.
   sid string  Session identifier for a server connection. Use the /server/login request to get a valid session identifier.
-  result  
+  result
   # name  type  description
   0 type  integer Type of the value (1=NUMERIC, 2=STRING, 99=ERROR)
   1 exists  boolean 1 if numeric value is non-zero or string value is non-empty

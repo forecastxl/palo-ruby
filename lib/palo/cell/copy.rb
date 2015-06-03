@@ -4,7 +4,7 @@ module Palo
       def initialize(session)
         super(session)
         @request              = '/cell/copy'
-        @request_params       = %w(database cube function path area path_to use_rules value locked_paths sid)
+        @request_params       = %w(database name_database cube name_cube function path area path_to use_rules value locked_paths sid)
         @response_keys        = %w(OK)
         @single_response      = true
       end
@@ -15,8 +15,8 @@ end
 <<-eos
   request url http://[SERVER]:[PORT]/cell/copy[?PARAMETER1=value[&...]]
   short description Copies a cell path or a calculated predictive value to an other cell path
-  long description  
-  parameters  
+  long description
+  parameters
   name  type  description
   database  identifier  Identifier of a database
   cube  identifier  Identifier of a cube
@@ -29,7 +29,7 @@ end
   value double  The numeric value of the target cube cell. (optional)
   locked_paths  path  Optional colon separated list of paths. Each path is comma separated list of element identifier. Splashing will not change locked paths and sources areas of these paths if they are consolidated.
   sid string  Session identifier for a server connection. Use the /server/login request to get a valid session identifier.
-  result  
+  result
   # name  type  description
   0 OK  boolean "1" means OK
 eos
