@@ -4,7 +4,7 @@ module Palo
       def initialize(session)
         super(session)
         @request              = '/cube/clear'
-        @request_params       = %w(database name_database cube name_cube area complete sid)
+        @request_params       = %w(database name_database cube name_cube area name_area complete sid)
         @response_keys        = %w(cube name_cube number_dimensions dimensions number_cells number_filled_cells status type cube_token)
         @trim_quotes          = %w(name_cube)
         @single_response      = true
