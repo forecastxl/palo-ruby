@@ -14,18 +14,18 @@ module Palo
 
       # Copy this from the palo api docs.
       @request_params = []
-      
+
       # The columns of the response rows, copy from palo api docs.
       @response_keys = []
 
-      @trim_quotes = []                 
+      @trim_quotes = []
 
       # If this request always return one row of data, like 'create'.
       # Or a request that only returns OK = 1, like 'destroy'.
       @single_response = false
     end
 
-    # Execute the request and return the result with each row as parameterized 
+    # Execute the request and return the result with each row as parameterized
     # and treated according to the settings of the request.
     def execute(params = {})
       puts "PALO request '#{@request}' with params: #{params}" if @session.debug
@@ -58,7 +58,7 @@ module Palo
       params.reject { |e| !@request_params.include?(e.to_s)  }
     end
 
-    # Parse the whole response. 
+    # Parse the whole response.
     # Return a single row of the result data according to settings of the request.
     def parse_response(response)
       result = split_response(response, :parse_line)
@@ -73,12 +73,9 @@ module Palo
       result
     end
 
-  private
+    private
 
     TRIM_REGEX = /(^\")|(\"$)/
-    
-    # Keep everything private so nobody accidentaly makes a call like
-    # `session.server.split("haha")`
 
     def split_lines(str)
       str.split("\n")
@@ -101,6 +98,5 @@ module Palo
       elements.each { |e| hash[e].gsub!(TRIM_REGEX, '') }
       hash
     end
-
   end
 end

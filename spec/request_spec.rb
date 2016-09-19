@@ -17,7 +17,6 @@ describe 'Request' do
 
   context "when splitting result into lines" do
     let(:databases_results) { "1;\"BedrijfX\";31;32;1;0;1377002785;\n2;\"BedrijfY\";31;32;1;0;253233241;\n" }
-   
 
     it "returns an array" do
       result = request.send(:split_lines, databases_results)

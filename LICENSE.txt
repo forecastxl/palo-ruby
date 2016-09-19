@@ -1,4 +1,4 @@
-Copyright (c) 2013 Arnold
+Copyright (c) 2016 ForecastXL
 
 MIT License
 

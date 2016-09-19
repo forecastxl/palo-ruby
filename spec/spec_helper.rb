@@ -6,5 +6,5 @@ RSpec.configure do |config|
   config.formatter     = 'documentation'
 
   # declare an exclusion filter
-  config.filter_run_excluding :broken => true
+  config.filter_run_excluding broken: true
 end
